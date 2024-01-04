@@ -32,6 +32,8 @@ const Profile = () => {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
+  const [listingDeleteError, setListingDeleteError] = useState(false);
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (file) {
@@ -139,6 +141,25 @@ const Profile = () => {
     }
   };
 
+  const handleListingDelete = async (listingId) => {
+    try {
+      const res = await fetch(`/server/listing/delete/${listingId}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        setListingDeleteError(true);
+        return;
+      }
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+      console.log(listingDeleteError);
+    } catch (error) {
+      setListingDeleteError(true);
+    }
+  };
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center m-7">Profile</h1>
@@ -235,7 +256,7 @@ const Profile = () => {
           {userListings.map((listings) => (
             <div
               key={listings._id}
-              className="border rounded-lg p-3 flex justify-between items-center"
+              className="border rounded-lg p-3 flex justify-between items-center gap-4"
             >
               <Link to={`/listings/${listings._id}`}>
                 <img
@@ -252,7 +273,12 @@ const Profile = () => {
               </Link>
 
               <div className="flex flex-col items-center">
-                <button className="text-red-700 uppercase">Delete</button>
+                <button
+                  onClick={() => handleListingDelete(listings._id)}
+                  className="text-red-700 uppercase"
+                >
+                  Delete
+                </button>
                 <button className="text-green-700 uppercase">Edit</button>
               </div>
             </div>
