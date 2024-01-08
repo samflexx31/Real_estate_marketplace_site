@@ -38,6 +38,7 @@ const Listing = () => {
       {error && (
         <p className="text-center my-7 text-2xl">something went wrong!</p>
       )}
+
       {listing && !loading && !error && (
         <>
           <Swiper navigation>
@@ -45,7 +46,10 @@ const Listing = () => {
               <SwiperSlide key={url}>
                 <div
                   className="h-[550px]"
-                  style={{ background: `url${url} center no-repeat` }}
+                  style={{
+                    background: `url(${url}) center no-repeat`,
+                    backgroundSize: "cover",
+                  }}
                 ></div>
               </SwiperSlide>
             ))}
