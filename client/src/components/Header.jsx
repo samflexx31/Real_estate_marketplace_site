@@ -5,13 +5,13 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
-  const [SearchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(location.search);
-    urlParams.set("searchTerm", SearchTerm);
+    urlParams.set("searchTerm", searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
@@ -19,6 +19,7 @@ const Header = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const searchTermFromUrl = urlParams.get("searchTerm");
+
     if (searchTermFromUrl) {
       setSearchTerm(searchTermFromUrl);
     }
@@ -41,7 +42,7 @@ const Header = () => {
             type="text"
             placeholder="Search..."
             className="bg-transparent focus:outline-none w-24 sm:w-64"
-            value={SearchTerm}
+            value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button>

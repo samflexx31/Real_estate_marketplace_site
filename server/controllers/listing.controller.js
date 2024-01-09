@@ -87,7 +87,7 @@ export const getListings = async (req, res, next) => {
     let type = req.query.type;
 
     if (type === undefined || type === "all") {
-      type = { $in: ("sale", "rent") };
+      type = { $in: ["sale", "rent"] };
     }
 
     const searchTerm = req.query.searchTerm || "";
@@ -109,6 +109,7 @@ export const getListings = async (req, res, next) => {
 
     return res.status(200).json(listings);
   } catch (error) {
+    console.error("Error in getListings:", error);
     next(error);
   }
 };
