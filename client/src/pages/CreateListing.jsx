@@ -30,7 +30,6 @@ const CreateListing = () => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(formData);
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
@@ -90,7 +89,6 @@ const CreateListing = () => {
       imageUrls: formData.imageUrls.filter((_, i) => i !== index),
     });
   };
-  console.log(formData);
   const handleChange = (e) => {
     if (e.target.id == "sale" || e.target.id === "rent") {
       setFormData({
