@@ -30,9 +30,7 @@ const Listing = () => {
       try {
         setLoading(true);
         const res = await fetch(`/server/listing/get/${params.id}`);
-        console.log(res.status);
         const data = await res.json();
-        console.log(data);
         if (data.success === false) {
           setError(true);
           return;
