@@ -274,7 +274,7 @@ const CreateListing = () => {
                 type="number"
                 id="regularPrice"
                 min={"50"}
-                max={"1000000"}
+                max={"100000000"}
                 required
                 className="p-3 border-gray-300 rounded-lg"
                 onChange={handleChange}
@@ -292,7 +292,7 @@ const CreateListing = () => {
                   type="number"
                   id="discountPrice"
                   min={"0"}
-                  max={"100000"}
+                  max={"100000000"}
                   required
                   className="p-3 border-gray-300 rounded-lg"
                   onChange={handleChange}
